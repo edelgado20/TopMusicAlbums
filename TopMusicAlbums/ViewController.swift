@@ -9,9 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
     let tableView = UITableView()
     var safeArea = UILayoutGuide()
     var sampleData = ["Dodgers", "Angels", "Rangers", "Yankees"]
+    let musicURL = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/explicit.json"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +38,29 @@ class ViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
+    
+    public func fetchData(completionHandler: @escaping ([String]) -> Void) {
+        guard let url = URL(string: musicURL) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error with fetching music albums: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Error with the response, unexpected status code: \(response)")
+                return
+            }
+            
+            
+        }
+    
+    }
 }
 
 extension ViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sampleData.count
     }
@@ -48,4 +70,5 @@ extension ViewController: UITableViewDataSource {
         cell.textLabel?.text = sampleData[indexPath.row]
         return cell
     }
+    
 }
