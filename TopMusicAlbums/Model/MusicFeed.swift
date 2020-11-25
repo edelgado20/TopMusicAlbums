@@ -8,8 +8,8 @@
 
 import Foundation
 
-// MARK: - Album
-struct Album: Codable {
+// MARK: - MusicFeed
+struct MusicFeed: Codable {
     let feed: Feed
 }
 
