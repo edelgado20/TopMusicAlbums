@@ -49,7 +49,7 @@ struct Result: Codable {
     let copyright, artistID: String
     let contentAdvisoryRating: ContentAdvisoryRating?
     let artistURL: String
-    let artworkUrl100: String
+    let albumThumbnailURL: String
     let genres: [Genre]
     let url: String
 
@@ -58,7 +58,8 @@ struct Result: Codable {
         case artistID = "artistId"
         case contentAdvisoryRating
         case artistURL = "artistUrl"
-        case artworkUrl100, genres, url
+        case albumThumbnailURL = "artworkUrl100"
+        case genres, url
     }
 }
 

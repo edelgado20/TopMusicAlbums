@@ -15,6 +15,9 @@
 		3F9FBE3224E61BE400A9F629 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9FBE3024E61BE400A9F629 /* LaunchScreen.storyboard */; };
 		3F9FBE3D24E61BE400A9F629 /* TopMusicAlbumsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9FBE3C24E61BE400A9F629 /* TopMusicAlbumsTests.swift */; };
 		3F9FBE4824E61BE400A9F629 /* TopMusicAlbumsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9FBE4724E61BE400A9F629 /* TopMusicAlbumsUITests.swift */; };
+		3FCB660C257894A5001B6C29 /* NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB660B257894A5001B6C29 /* NetworkingClient.swift */; };
+		3FCB660E2578A601001B6C29 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB660D2578A601001B6C29 /* AlbumTableViewCell.swift */; };
+		3FCB66102579C21B001B6C29 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB660F2579C21B001B6C29 /* ResultViewModel.swift */; };
 		3FEA9C21256CEF6E001DAE61 /* MusicFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA9C20256CEF6E001DAE61 /* MusicFeed.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,9 @@
 		3F9FBE4324E61BE400A9F629 /* TopMusicAlbumsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopMusicAlbumsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9FBE4724E61BE400A9F629 /* TopMusicAlbumsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMusicAlbumsUITests.swift; sourceTree = "<group>"; };
 		3F9FBE4924E61BE400A9F629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FCB660B257894A5001B6C29 /* NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingClient.swift; sourceTree = "<group>"; };
+		3FCB660D2578A601001B6C29 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		3FCB660F2579C21B001B6C29 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		3FEA9C20256CEF6E001DAE61 /* MusicFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,14 +107,13 @@
 		3F9FBE2424E61BE100A9F629 /* TopMusicAlbums */ = {
 			isa = PBXGroup;
 			children = (
+				3FCB660A25789412001B6C29 /* Networking */,
 				3FEA9C1F256CEF34001DAE61 /* Model */,
-				3F9FBE2524E61BE100A9F629 /* AppDelegate.swift */,
-				3F9FBE2724E61BE100A9F629 /* SceneDelegate.swift */,
-				3F9FBE2924E61BE100A9F629 /* ViewController.swift */,
-				3F9FBE2B24E61BE100A9F629 /* Main.storyboard */,
-				3F9FBE2E24E61BE400A9F629 /* Assets.xcassets */,
-				3F9FBE3024E61BE400A9F629 /* LaunchScreen.storyboard */,
-				3F9FBE3324E61BE400A9F629 /* Info.plist */,
+				3FCB660625788EEC001B6C29 /* View */,
+				3FCB660525788ECD001B6C29 /* ViewModel */,
+				3FCB660725788F15001B6C29 /* Controllers */,
+				3FCB660825789026001B6C29 /* Delegate */,
+				3FCB66092578903B001B6C29 /* Resources */,
 			);
 			path = TopMusicAlbums;
 			sourceTree = "<group>";
@@ -129,6 +134,58 @@
 				3F9FBE4924E61BE400A9F629 /* Info.plist */,
 			);
 			path = TopMusicAlbumsUITests;
+			sourceTree = "<group>";
+		};
+		3FCB660525788ECD001B6C29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3FCB660F2579C21B001B6C29 /* ResultViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3FCB660625788EEC001B6C29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F9FBE2B24E61BE100A9F629 /* Main.storyboard */,
+				3F9FBE3024E61BE400A9F629 /* LaunchScreen.storyboard */,
+				3FCB660D2578A601001B6C29 /* AlbumTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3FCB660725788F15001B6C29 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F9FBE2924E61BE100A9F629 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FCB660825789026001B6C29 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				3F9FBE2724E61BE100A9F629 /* SceneDelegate.swift */,
+				3F9FBE2524E61BE100A9F629 /* AppDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		3FCB66092578903B001B6C29 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F9FBE3324E61BE400A9F629 /* Info.plist */,
+				3F9FBE2E24E61BE400A9F629 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3FCB660A25789412001B6C29 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3FCB660B257894A5001B6C29 /* NetworkingClient.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		3FEA9C1F256CEF34001DAE61 /* Model */ = {
@@ -271,9 +328,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F9FBE2A24E61BE100A9F629 /* ViewController.swift in Sources */,
+				3FCB66102579C21B001B6C29 /* ResultViewModel.swift in Sources */,
+				3FCB660C257894A5001B6C29 /* NetworkingClient.swift in Sources */,
 				3F9FBE2624E61BE100A9F629 /* AppDelegate.swift in Sources */,
 				3F9FBE2824E61BE100A9F629 /* SceneDelegate.swift in Sources */,
 				3FEA9C21256CEF6E001DAE61 /* MusicFeed.swift in Sources */,
+				3FCB660E2578A601001B6C29 /* AlbumTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5SJXENS48L;
-				INFOPLIST_FILE = TopMusicAlbums/Info.plist;
+				INFOPLIST_FILE = TopMusicAlbums/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,7 +526,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5SJXENS48L;
-				INFOPLIST_FILE = TopMusicAlbums/Info.plist;
+				INFOPLIST_FILE = TopMusicAlbums/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

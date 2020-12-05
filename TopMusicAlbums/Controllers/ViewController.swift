@@ -12,22 +12,21 @@ class ViewController: UIViewController {
     
     let tableView = UITableView()
     var safeArea = UILayoutGuide()
-    var sampleData = ["Dodgers", "Angels", "Rangers", "Yankees"]
-    let musicURL = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10 /explicit.json"
     var topMusicAlbums: [Result] = []
+    let networkingClient = NetworkingClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+
         view.backgroundColor = .white
         safeArea = view.layoutMarginsGuide
         
         tableView.dataSource = self
         setupTableView()
-        fetchData { [weak self] musicFeed in
+        
+        networkingClient.fetchTopMusicAlbums {[weak self] musicFeed in
             self?.topMusicAlbums = musicFeed.feed.results
-
+            
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -44,31 +43,9 @@ class ViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-    public func fetchData(completionHandler: @escaping (MusicFeed) -> Void) {
-        guard let url = URL(string: musicURL) else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Error with fetching music albums: \(error)")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(String(describing: response))")
-                return
-            }
-            
-            if let data = data, let musicFeed = try? JSONDecoder().decode(MusicFeed.self, from: data) {
-                completionHandler(musicFeed)
-            } else {
-                print("Error in decoding the JSON file")
-            }
-        }
-        task.resume()
-    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -78,8 +55,17 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = topMusicAlbums[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AlbumTableViewCell
+        
+        // cell.textLabel?.text = topMusicAlbums[indexPath.row].name
+        let viewModel = ResultViewModel(album: topMusicAlbums[indexPath.row])
+        
+        if let url = URL(string: viewModel.albumThumbnailURL) {
+            if let data = try? Data(contentsOf: url) {
+                cell.thumbnailImage.image = UIImage(data: data)
+            }
+        }
+        
         return cell
     }
     
