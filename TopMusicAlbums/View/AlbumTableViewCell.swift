@@ -12,28 +12,14 @@ class AlbumTableViewCell: UITableViewCell {
     
     // Create a UIImage and two text labels
     let thumbnailImage = UIImageView()
-//    let albumName = UILabel()
-//    let artistName = UILabel()
+    let albumName = UILabel()
+    let artistName = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        thumbnailImage.backgroundColor = .blue
-        
-        thumbnailImage.translatesAutoresizingMaskIntoConstraints = false
-        //albumName.translatesAutoresizingMaskIntoConstraints = false
-        //artistName.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentView.addSubview(thumbnailImage)
-        //contentView.addSubview(albumName)
-        //contentView.addSubview(artistName)
-        
-        let viewsDictionary = ["image": thumbnailImage]
-        
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[image(50)]-|", options: [], metrics: nil, views: viewsDictionary))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[image(60)]-|", options: [], metrics: nil, views: viewsDictionary))
-        
-        //print("Constraint: \(contentView.constraints)")
+        setupLabels()
+        setupStackView()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -50,5 +36,34 @@ class AlbumTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func setupLabels() {
+        thumbnailImage.translatesAutoresizingMaskIntoConstraints = false
+        albumName.translatesAutoresizingMaskIntoConstraints = false
+        artistName.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(thumbnailImage)
+        contentView.addSubview(albumName)
+        contentView.addSubview(artistName)
+        
+        thumbnailImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4).isActive = true
+        thumbnailImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
+        thumbnailImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
+        let widthConstraint = thumbnailImage.widthAnchor.constraint(equalToConstant: 80)
+        widthConstraint.priority = UILayoutPriority(750)
+        widthConstraint.isActive = true
+        let heightConstraint = thumbnailImage.heightAnchor.constraint(equalToConstant: 80)
+        heightConstraint.priority = UILayoutPriority(750)
+        heightConstraint.isActive = true
+    }
+    
+    func setupStackView() {
+        let stackView = UIStackView(arrangedSubviews: [albumName, artistName])
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(stackView)
+        
+        stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        stackView.leftAnchor.constraint(equalTo: thumbnailImage.rightAnchor, constant: 8).isActive = true
+    }
 }

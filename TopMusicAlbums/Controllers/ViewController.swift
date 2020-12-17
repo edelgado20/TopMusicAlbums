@@ -63,8 +63,12 @@ extension ViewController: UITableViewDataSource {
         if let url = URL(string: viewModel.albumThumbnailURL) {
             if let data = try? Data(contentsOf: url) {
                 cell.thumbnailImage.image = UIImage(data: data)
+                
             }
         }
+        
+        cell.albumName.text = viewModel.albumName
+        cell.artistName.text = viewModel.artistName
         
         return cell
     }
