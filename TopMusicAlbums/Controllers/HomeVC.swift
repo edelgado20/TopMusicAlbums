@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeVC: UIViewController {
     
     let tableView = UITableView()
     var safeArea = UILayoutGuide()
@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         safeArea = view.layoutMarginsGuide
         
         tableView.dataSource = self
+        tableView.delegate = self
         setupTableView()
         
         networkingClient.fetchTopMusicAlbums {[weak self] musicFeed in
@@ -48,7 +49,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITableViewDataSource {
+extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topMusicAlbums.count
@@ -63,14 +64,24 @@ extension ViewController: UITableViewDataSource {
         if let url = URL(string: viewModel.albumThumbnailURL) {
             if let data = try? Data(contentsOf: url) {
                 cell.thumbnailImage.image = UIImage(data: data)
-                
             }
         }
         
         cell.albumName.text = viewModel.albumName
         cell.artistName.text = viewModel.artistName
+        cell.selectionStyle = .none
         
         return cell
     }
     
+}
+
+extension HomeVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let descriptionVC = DescriptionVC()
+        let viewModel = ResultViewModel(album: topMusicAlbums[indexPath.row])
+        descriptionVC.viewModel = viewModel
+        
+        navigationController?.pushViewController(descriptionVC, animated: true)
+    }
 }
