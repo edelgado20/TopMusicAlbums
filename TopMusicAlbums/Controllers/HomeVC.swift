@@ -58,7 +58,6 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AlbumTableViewCell
         
-        // cell.textLabel?.text = topMusicAlbums[indexPath.row].name
         let viewModel = ResultViewModel(album: topMusicAlbums[indexPath.row])
         
         if let url = URL(string: viewModel.albumThumbnailURL) {

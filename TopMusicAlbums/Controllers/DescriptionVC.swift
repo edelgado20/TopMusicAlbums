@@ -48,7 +48,11 @@ class DescriptionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        addSubviews()
+        setupLabels()
+    }
+    
+    func addSubviews() {
         view.addSubview(imageView)
         view.addSubview(albumName)
         view.addSubview(artistName)
@@ -63,7 +67,9 @@ class DescriptionVC: UIViewController {
         releaseDate.translatesAutoresizingMaskIntoConstraints = false
         copyrightInfo.translatesAutoresizingMaskIntoConstraints = false
         sendToItunesStoreButton.translatesAutoresizingMaskIntoConstraints = false
-        
+    }
+    
+    func setupLabels() {
         imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 140).isActive = true
